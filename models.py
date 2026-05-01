@@ -91,3 +91,22 @@ class ATMCheckoutResponse(BaseModel):
     tx: str
     amount: int
     stayMinutes: int
+
+
+class ATMGracePeriodResponse(BaseModel):
+    hasGracePeriod: bool
+    minutesRemaining: int
+
+
+class ATMChargeResponse(BaseModel):
+    tx: str
+    status: str
+    mode: str
+    lines: List[int]
+
+
+class ATMChargeRequest(BaseModel):
+    tx: str
+    status: str
+    mode: str
+    lines: List[int]

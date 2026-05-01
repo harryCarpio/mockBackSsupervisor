@@ -1,4 +1,4 @@
-Add and endpoints to satisfy next requirements:
+Add an endpoint to satisfy next requirements:
 
 - Endpoint: "GET /api/atm/checkout"
 - Query params: plate (string) and cajeroKey (string uuid)
@@ -10,10 +10,18 @@ Add and endpoints to satisfy next requirements:
 
 ____________________________
 
-Add and endpoints to satisfy next requirements:
+Add an endpoint to satisfy next requirements:
 - Endpoint: "GET /api/atm/gracePeriod"
 - Query params: plate (string) and cajeroKey (string uuid)
 - Response: 
     ```json
     { "hasGracePeriod": true, "minutesRemaining": 15 }
+    ```
+____________________________
+
+Update the endpoint:
+- Endpoint: "POST /api/atm/charge"
+- Request body: 
+    ```json
+    { "tx": "uuid", "status": "ATM-OK", "mode": "electronic", "lines": [1]}
     ```

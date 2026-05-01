@@ -15,6 +15,9 @@ from models import (
     IncidentRequest,
     IncidentResponse,
     ATMCheckoutResponse,
+    ATMGracePeriodResponse,
+    ATMChargeResponse,
+    ATMChargeRequest,
 )
 from auth import create_access_token, verify_token
 from config import ACCESS_TOKEN_EXPIRE_MINUTES, REFRESH_TOKEN_EXPIRE_DAYS
@@ -211,4 +214,33 @@ async def atm_checkout(
         "tx": str(uuid4()),
         "amount": 3500,
         "stayMinutes": 120,
+    }
+
+
+@atm_router.get("/gracePeriod", response_model=ATMGracePeriodResponse, tags=["ATM"])
+async def atm_grace_period(
+    plate: str = Query(..., description="Placa del vehículo"),
+    cajeroKey: str = Query(..., description="UUID de la caja"),
+):
+    """
+    ATM Grace Period Endpoint.
+    Consulta si hay período de gracia y minutos restantes.
+    """
+    return {
+        "hasGracePeriod": True,
+        "minutesRemaining": 15,
+    }
+
+
+@atm_router.post("/charge", response_model=ATMChargeResponse, tags=["ATM"])
+async def atm_charge(request: ATMChargeRequest):
+    """
+    ATM Charge Endpoint.
+    Procesa el pago en el ATM.
+    """
+    return {
+        "tx": request.tx,
+        "status": request.status,
+        "mode": request.mode,
+        "lines": request.lines,
     }
