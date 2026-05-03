@@ -2,6 +2,8 @@
 # API Endpoints
 # ==========================================
 
+from asyncio import sleep
+
 from fastapi import APIRouter, Depends, Query
 from datetime import datetime, timedelta
 from uuid import uuid4
@@ -210,10 +212,11 @@ async def atm_checkout(
     ATM Checkout Endpoint.
     Consulta de saldo y detalles de pago en el ATM.
     """
+    await sleep(3)  # Simula procesamiento
     return {
         "tx": str(uuid4()),
-        "amount": 3500,
-        "stayMinutes": 120,
+        "amount": 5.5,
+        "stayMinutes": 110,
     }
 
 

@@ -89,7 +89,7 @@ class IncidentResponse(BaseModel):
 
 class ATMCheckoutResponse(BaseModel):
     tx: str
-    amount: int
+    amount: float
     stayMinutes: int
 
 
